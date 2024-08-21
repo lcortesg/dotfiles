@@ -1,3 +1,8 @@
+#if [ -r ~/.config/zshrc/.zshrc ]; then
+#    source ~/.config/zshrc/.zshrc
+#fi
+
+
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
