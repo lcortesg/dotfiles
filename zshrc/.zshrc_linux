@@ -1,0 +1,20 @@
+#if [ -r ~/.config/zshrc/.zshrc ]; then
+#    source ~/.config/zshrc/.zshrc
+#fi
+
+source ~/dotfiles/bash/.bashrc
+eval "$(starship init zsh)"
+export STARSHIP_CONFIG=~/.config/starship/starship.toml
+
+export LANG=en_US.UTF-8
+
+eval "$(zoxide init --cmd cd zsh)"
+
+
+# VIM
+alias v="/opt/homebrew/bin/nvim"
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+
+
