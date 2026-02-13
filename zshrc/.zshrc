@@ -1,38 +1,21 @@
-#if [ -r ~/.config/zshrc/.zshrc ]; then
-#    source ~/.config/zshrc/.zshrc
-#fi
-
-
-# Path to your Oh My Zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
-
-source ~/.bash_profile
-
-#plugins=(git zsh-autosuggestions zsh-syntax-highlighting fast-syntax-highlighting zsh-autocomplete)
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting fast-syntax-highlighting)
-
-eval "$(starship init zsh)"
-export STARSHIP_CONFIG=~/.config/starship/starship.toml
-
 export LANG=en_US.UTF-8
-export EDITOR=/opt/homebrew/bin/nvim
+export PATH="$HOME/.local/bin:$PATH"
 
+BREW_PREFIX="/opt/homebrew"
 
-eval "$(zoxide init --cmd cd zsh)"
-source <(fzf --zsh)
-eval "$(/opt/homebrew/bin/brew shellenv)"
+# Plugins
+source "$BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+source "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
-source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-(( ${+ZSH_HIGHLIGHT_STYLES} )) || typeset -A ZSH_HIGHLIGHT_STYLES
-ZSH_HIGHLIGHT_STYLES[path]=none
-ZSH_HIGHLIGHT_STYLES[path_prefix]=none
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# zoxide
+eval "$(zoxide init zsh --cmd cd)"
 
-#if [ "$TERM_PROGRAM" == "Apple Terminal" ]; then
-#  eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/theme.json)"
-#fi
+# fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# Aliases
+# Starship
+export STARSHIP_CONFIG=~/.config/starship/starship.toml
+eval "$(starship init zsh)"
 
-# VIM
-alias v="/opt/homebrew/bin/nvim"
+# Conda (lazy)
+export PATH="$HOME/miniconda3/bin:$PATH"

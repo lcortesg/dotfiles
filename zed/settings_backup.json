@@ -7,7 +7,6 @@
 // custom settings, run the `zed: Open Default Settings` command
 // from the command palette
 {
-  "icon_theme": "Catppuccin Frappé",
   "ssh_connections": [
     {
       "host": "server-gsp",
@@ -20,14 +19,15 @@
       ]
     }
   ],
-  "agent": {
+  "assistant": {
     "default_model": {
       "provider": "zed.dev",
       "model": "claude-3-5-sonnet-20240620"
     },
+    "version": "2"
   },
   "features": {
-    "edit_prediction_provider": "none"
+    "inline_completion_provider": "none"
   },
   "ui_font_size": 14,
   "buffer_font_size": 13,
