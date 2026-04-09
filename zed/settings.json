@@ -11,13 +11,34 @@
   "ssh_connections": [
     {
       "host": "server-gsp",
+      "args": [],
       "projects": [
         {
           "paths": [
             "/home/lucas"
           ]
+        },
+        {
+          "paths": [
+            "/opt/monitor"
+          ]
+        },
+        {
+          "paths": [
+            "/root"
+          ]
         }
       ]
+    },
+    {
+      "host": "vps",
+      "args": [],
+      "projects": []
+    },
+    {
+      "host": "vps",
+      "args": [],
+      "projects": []
     }
   ],
   "agent": {
