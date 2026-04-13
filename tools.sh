@@ -15,6 +15,23 @@ ARCH="$(uname -m)"
 echo "→ Installing tools ($OS $ARCH)"
 
 # --------------------------------------------------
+# Antidote (Zsh plugin manager)
+# --------------------------------------------------
+
+install_antidote() {
+    ANTIDOTE_DIR="$HOME/.antidote"
+
+    if [ ! -d "$ANTIDOTE_DIR/.git" ]; then
+        echo "→ Installing antidote"
+        git clone --depth=1 https://github.com/mattmc3/antidote.git "$ANTIDOTE_DIR"
+    else
+        echo "→ Updating antidote"
+        git -C "$ANTIDOTE_DIR" fetch --depth=1 origin
+        git -C "$ANTIDOTE_DIR" reset --hard origin/main
+    fi
+}
+
+# --------------------------------------------------
 # fzf
 # --------------------------------------------------
 
@@ -94,6 +111,7 @@ install_miniconda() {
 # Run all installers
 # --------------------------------------------------
 
+install_antidote
 install_fzf
 install_starship
 install_zoxide
