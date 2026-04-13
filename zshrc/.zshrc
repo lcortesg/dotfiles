@@ -2,12 +2,6 @@ export LANG=en_US.UTF-8
 export PATH="$HOME/.local/bin:$PATH"
 
 # --------------------------------------------------
-# Zsh setup
-# --------------------------------------------------
-autoload -Uz compinit
-compinit
-
-# --------------------------------------------------
 # Plugins (dotfiles)
 # --------------------------------------------------
 ZSH_PLUGINS="$HOME/.config/zshrc/plugins"
@@ -15,6 +9,31 @@ ZSH_PLUGINS="$HOME/.config/zshrc/plugins"
 # autosuggestions FIRST
 [ -f "$ZSH_PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && \
     source "$ZSH_PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh"
+
+# history substring search (after autosuggestions)
+[ -f "$ZSH_PLUGINS/zsh-history-substring-search/zsh-history-substring-search.zsh" ] && \
+    source "$ZSH_PLUGINS/zsh-history-substring-search/zsh-history-substring-search.zsh"
+
+# better completions (must be before compinit)
+[ -d "$ZSH_PLUGINS/zsh-completions/src" ] && \
+    fpath+=("$ZSH_PLUGINS/zsh-completions/src")
+
+# --------------------------------------------------
+# Completion system
+# --------------------------------------------------
+autoload -Uz compinit
+compinit -C
+
+# keybindings for history search
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
+# optional helpers
+[ -f "$ZSH_PLUGINS/alias-tips/alias-tips.plugin.zsh" ] && \
+    source "$ZSH_PLUGINS/alias-tips/alias-tips.plugin.zsh"
+
+[ -f "$ZSH_PLUGINS/you-should-use/you-should-use.plugin.zsh" ] && \
+    source "$ZSH_PLUGINS/you-should-use/you-should-use.plugin.zsh"
 
 # syntax highlighting LAST
 [ -f "$ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && \
@@ -39,16 +58,22 @@ command -v starship >/dev/null 2>&1 && eval "$(starship init zsh)"
 # --------------------------------------------------
 # Conda (portable)
 # --------------------------------------------------
-CONDA_HOME="$HOME/miniconda3"
+#
+conda() {
+    unset -f conda
+    source "$HOME/miniconda3/etc/profile.d/conda.sh"
+    conda "$@"
+}
+# CONDA_HOME="$HOME/miniconda3"
 
-if [ -x "$CONDA_HOME/bin/conda" ]; then
-    __conda_setup="$("$CONDA_HOME/bin/conda" 'shell.zsh' 'hook' 2> /dev/null)"
-    if [ $? -eq 0 ]; then
-        eval "$__conda_setup"
-    elif [ -f "$CONDA_HOME/etc/profile.d/conda.sh" ]; then
-        . "$CONDA_HOME/etc/profile.d/conda.sh"
-    else
-        export PATH="$CONDA_HOME/bin:$PATH"
-    fi
-    unset __conda_setup
-fi
+# if [ -x "$CONDA_HOME/bin/conda" ]; then
+#     __conda_setup="$("$CONDA_HOME/bin/conda" 'shell.zsh' 'hook' 2> /dev/null)"
+#     if [ $? -eq 0 ]; then
+#         eval "$__conda_setup"
+#     elif [ -f "$CONDA_HOME/etc/profile.d/conda.sh" ]; then
+#         . "$CONDA_HOME/etc/profile.d/conda.sh"
+#     else
+#         export PATH="$CONDA_HOME/bin:$PATH"
+#     fi
+#     unset __conda_setup
+# fi
