@@ -1,0 +1,4 @@
+git
+stow
+zsh
+curl

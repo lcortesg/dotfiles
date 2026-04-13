@@ -1,0 +1,6 @@
+zsh-users/zsh-autosuggestions
+zsh-users/zsh-history-substring-search
+zsh-users/zsh-completions
+djui/alias-tips
+MichaelAquilina/zsh-you-should-use
+zsh-users/zsh-syntax-highlighting
