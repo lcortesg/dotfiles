@@ -4,7 +4,7 @@ set -e
 echo "→ Building plugin bundle (antidote)"
 
 ANTIDOTE_DIR="$HOME/.antidote"
-PLUGIN_FILE="$HOME/.config/zsh/plugins.txt"
+PLUGIN_FILE="$HOME/dotfiles/plugins.txt"
 OUTPUT_FILE="$HOME/.zsh_plugins.zsh"
 
 # --------------------------------------------------
