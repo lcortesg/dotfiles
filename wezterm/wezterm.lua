@@ -67,7 +67,7 @@ config.tab_bar_at_bottom = true
 config.hide_tab_bar_if_only_one_tab = true
 
 config.font = wezterm.font("MesloLGS Nerd Font Mono", { weight = "Bold" })
-config.font_size = 13
+config.font_size = 12
 config.window_background_opacity = 0.9
 config.macos_window_background_blur = 10
 
