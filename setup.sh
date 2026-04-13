@@ -15,11 +15,14 @@ clone_if_missing() {
     local repo="$1"
     local dir="$2"
 
-    if [ ! -d "$dir" ]; then
+    if [ ! -d "$dir/.git" ]; then
         echo "→ Installing $(basename "$dir")"
         git clone --depth=1 "$repo" "$dir"
     else
-        echo "→ $(basename "$dir") already installed"
+        echo "→ Updating $(basename "$dir")"
+        git -C "$dir" pull --ff-only --quiet || {
+            echo "⚠️  Failed to update $(basename "$dir"), skipping"
+        }
     fi
 }
 
@@ -28,6 +31,7 @@ clone_if_missing() {
 # --------------------------------------------------
 
 OS="$(uname)"
+ARCH="$(uname -m)"
 
 case "$OS" in
     Darwin) PLATFORM="mac" ;;
@@ -39,6 +43,7 @@ case "$OS" in
 esac
 
 echo "→ Detected OS: $PLATFORM"
+echo "→ Detected architecture: $ARCH"
 
 # --------------------------------------------------
 # Base dirs
@@ -97,12 +102,14 @@ done
 
 FZF_DIR="$ZSH_PLUGINS/fzf"
 
-if [ ! -d "$FZF_DIR" ]; then
+if [ ! -d "$FZF_DIR/.git" ]; then
     echo "→ Installing fzf"
     git clone --depth=1 https://github.com/junegunn/fzf "$FZF_DIR"
+else
+    echo "→ Updating fzf"
+    git -C "$FZF_DIR" pull --ff-only --quiet || true
 fi
 
-# Always ensure keybindings/completions are installed
 "$FZF_DIR/install" --key-bindings --completion --no-update-rc || true
 
 # --------------------------------------------------
@@ -133,8 +140,6 @@ fi
 
 if [ ! -d "$HOME/miniconda3" ]; then
     echo "→ Installing Miniconda"
-
-    ARCH="$(uname -m)"
 
     if [ "$PLATFORM" = "mac" ]; then
         if [ "$ARCH" = "arm64" ]; then
