@@ -23,34 +23,32 @@ ZSH_PLUGINS="$HOME/.config/zshrc/plugins"
 # --------------------------------------------------
 # zoxide
 # --------------------------------------------------
-eval "$(zoxide init zsh --cmd cd)"
+command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init zsh --cmd cd)"
 
 # --------------------------------------------------
 # fzf
 # --------------------------------------------------
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f "$HOME/.fzf.zsh" ] && source "$HOME/.fzf.zsh"
 
 # --------------------------------------------------
 # Starship
 # --------------------------------------------------
-export STARSHIP_CONFIG=~/.config/starship/starship.toml
-eval "$(starship init zsh)"
+export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
+command -v starship >/dev/null 2>&1 && eval "$(starship init zsh)"
 
 # --------------------------------------------------
 # Conda (portable)
 # --------------------------------------------------
+CONDA_HOME="$HOME/miniconda3"
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/lucas/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/lucas/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/lucas/miniconda3/etc/profile.d/conda.sh"
+if [ -x "$CONDA_HOME/bin/conda" ]; then
+    __conda_setup="$("$CONDA_HOME/bin/conda" 'shell.zsh' 'hook' 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+        eval "$__conda_setup"
+    elif [ -f "$CONDA_HOME/etc/profile.d/conda.sh" ]; then
+        . "$CONDA_HOME/etc/profile.d/conda.sh"
     else
-        export PATH="/Users/lucas/miniconda3/bin:$PATH"
+        export PATH="$CONDA_HOME/bin:$PATH"
     fi
+    unset __conda_setup
 fi
-unset __conda_setup
-# <<< conda initialize <<<
