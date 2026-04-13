@@ -8,15 +8,17 @@ autoload -Uz compinit
 compinit
 
 # --------------------------------------------------
-# Plugins (APT-installed)
+# Plugins (dotfiles)
 # --------------------------------------------------
+ZSH_PLUGINS="$HOME/.config/zshrc/plugins"
+
 # autosuggestions FIRST
-[ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ] && \
-    source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+[ -f "$ZSH_PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && \
+    source "$ZSH_PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 # syntax highlighting LAST
-[ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && \
-    source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+[ -f "$ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && \
+    source "$ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 # --------------------------------------------------
 # zoxide

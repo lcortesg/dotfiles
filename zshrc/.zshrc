@@ -6,9 +6,18 @@ BREW_PREFIX="/opt/homebrew"
 autoload -Uz compinit
 compinit
 
-# Plugins
-source "$BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-source "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+# --------------------------------------------------
+# Plugins (dotfiles)
+# --------------------------------------------------
+ZSH_PLUGINS="$HOME/.config/zshrc/plugins"
+
+# autosuggestions FIRST
+[ -f "$ZSH_PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && \
+    source "$ZSH_PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh"
+
+# syntax highlighting LAST
+[ -f "$ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && \
+    source "$ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 # zoxide
 eval "$(zoxide init zsh --cmd cd)"
