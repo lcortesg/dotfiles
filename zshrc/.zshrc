@@ -1,8 +1,9 @@
 export LANG=en_US.UTF-8
 export PATH="$HOME/.local/bin:$PATH"
 
-BREW_PREFIX="/opt/homebrew"
-
+# --------------------------------------------------
+# Zsh setup
+# --------------------------------------------------
 autoload -Uz compinit
 compinit
 
@@ -19,18 +20,25 @@ ZSH_PLUGINS="$HOME/.config/zshrc/plugins"
 [ -f "$ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && \
     source "$ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
+# --------------------------------------------------
 # zoxide
+# --------------------------------------------------
 eval "$(zoxide init zsh --cmd cd)"
 
+# --------------------------------------------------
 # fzf
+# --------------------------------------------------
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# --------------------------------------------------
 # Starship
+# --------------------------------------------------
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
 eval "$(starship init zsh)"
 
-# Conda (lazy)
-# export PATH="$HOME/miniconda3/bin:$PATH"  # commented out by conda initialize
+# --------------------------------------------------
+# Conda (portable)
+# --------------------------------------------------
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
