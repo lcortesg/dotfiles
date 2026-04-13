@@ -47,7 +47,11 @@ command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init zsh --cmd cd)"
 # --------------------------------------------------
 # fzf
 # --------------------------------------------------
-[ -f "$HOME/.fzf.zsh" ] && source "$HOME/.fzf.zsh"
+#[ -f "$HOME/.fzf.zsh" ] && source "$HOME/.fzf.zsh"
+if [ -f "$ZSH_PLUGINS/fzf/shell/key-bindings.zsh" ]; then
+    source "$ZSH_PLUGINS/fzf/shell/key-bindings.zsh"
+    source "$ZSH_PLUGINS/fzf/shell/completion.zsh"
+fi
 
 # --------------------------------------------------
 # Starship
