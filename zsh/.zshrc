@@ -2,6 +2,20 @@ export LANG=en_US.UTF-8
 export PATH="$HOME/.local/bin:$PATH"
 
 # --------------------------------------------------
+# History
+# --------------------------------------------------
+
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=10000
+SAVEHIST=10000
+
+setopt appendhistory        # don't overwrite history
+setopt incappendhistory     # write immediately
+setopt sharehistory         # share across sessions
+setopt hist_ignore_dups     # no duplicate entries
+setopt hist_ignore_space    # ignore commands starting with space
+
+# --------------------------------------------------
 # Antidote (compiled bundle)
 # --------------------------------------------------
 
