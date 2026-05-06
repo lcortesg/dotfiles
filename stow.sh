@@ -6,7 +6,7 @@ cd "$(dirname "$0")"
 # ensure base dirs exist
 mkdir -p ~/.config
 
-packages=(zsh bash starship wezterm zed)
+packages=(zsh starship wezterm zed)
 
 for pkg in "${packages[@]}"; do
     echo "→ Stowing $pkg"
