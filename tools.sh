@@ -125,7 +125,7 @@ install_meslo() {
     TEMP_DIR=$(mktemp -d)
     trap "rm -rf $TEMP_DIR" EXIT
 
-    curl -sL "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Meslo.zip" -o "$TEMP_DIR/Meslo.zip"
+    curl -sL "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/Meslo.zip" -o "$TEMP_DIR/Meslo.zip"
     unzip -q "$TEMP_DIR/Meslo.zip" -d "$TEMP_DIR"
     cp "$TEMP_DIR"/*.ttf "$FONTS_DIR/"
 
