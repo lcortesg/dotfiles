@@ -127,7 +127,34 @@ install_meslo() {
 
     curl -sL "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/Meslo.zip" -o "$TEMP_DIR/Meslo.zip"
     unzip -q "$TEMP_DIR/Meslo.zip" -d "$TEMP_DIR"
-    cp "$TEMP_DIR"/*.ttf "$FONTS_DIR/"
+    find "$TEMP_DIR" -name "*.ttf" -exec cp {} "$FONTS_DIR/" \;
+
+    if command_exists fc-cache; then
+        fc-cache -fv "$FONTS_DIR" >/dev/null 2>&1
+    fi
+}
+
+# --------------------------------------------------
+# Atkinson Hyperlegible Mono Nerd Font
+# --------------------------------------------------
+
+install_atkinson() {
+    FONTS_DIR="$HOME/.local/share/fonts"
+    mkdir -p "$FONTS_DIR"
+
+    if [ -f "$FONTS_DIR/AtkinsonHyperlegibleMono-Regular.ttf" ]; then
+        echo "→ Atkinson Hyperlegible Mono Nerd Font already installed"
+        return
+    fi
+
+    echo "→ Installing Atkinson Hyperlegible Mono Nerd Font"
+
+    TEMP_DIR=$(mktemp -d)
+    trap "rm -rf $TEMP_DIR" EXIT
+
+    curl -sL "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/AtkinsonHyperlegibleMono.zip" -o "$TEMP_DIR/AtkinsonHyperlegibleMono.zip"
+    unzip -q "$TEMP_DIR/AtkinsonHyperlegibleMono.zip" -d "$TEMP_DIR"
+    find "$TEMP_DIR" -name "*.ttf" -exec cp {} "$FONTS_DIR/" \;
 
     if command_exists fc-cache; then
         fc-cache -fv "$FONTS_DIR" >/dev/null 2>&1
@@ -144,5 +171,6 @@ install_starship
 install_zoxide
 install_miniconda
 install_meslo
+install_atkinson
 
 echo "✔ Tools installed"
