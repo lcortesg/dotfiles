@@ -108,6 +108,33 @@ install_miniconda() {
 }
 
 # --------------------------------------------------
+# Meslo LG Nerd Font
+# --------------------------------------------------
+
+install_meslo() {
+    FONTS_DIR="$HOME/.local/share/fonts"
+    mkdir -p "$FONTS_DIR"
+
+    if [ -f "$FONTS_DIR/MesloLGS NF Regular.ttf" ]; then
+        echo "→ Meslo LG Nerd Font already installed"
+        return
+    fi
+
+    echo "→ Installing Meslo LG Nerd Font"
+
+    TEMP_DIR=$(mktemp -d)
+    trap "rm -rf $TEMP_DIR" EXIT
+
+    curl -sL "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Meslo.zip" -o "$TEMP_DIR/Meslo.zip"
+    unzip -q "$TEMP_DIR/Meslo.zip" -d "$TEMP_DIR"
+    cp "$TEMP_DIR"/*.ttf "$FONTS_DIR/"
+
+    if command_exists fc-cache; then
+        fc-cache -fv "$FONTS_DIR" >/dev/null 2>&1
+    fi
+}
+
+# --------------------------------------------------
 # Run all installers
 # --------------------------------------------------
 
@@ -116,5 +143,6 @@ install_fzf
 install_starship
 install_zoxide
 install_miniconda
+install_meslo
 
 echo "✔ Tools installed"
