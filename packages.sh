@@ -14,7 +14,14 @@ fi
 # Detect package manager
 # --------------------------------------------------
 
-if command -v brew >/dev/null 2>&1; then
+OS="$(uname)"
+
+if [ "$OS" = "Darwin" ]; then
+    if ! command -v brew >/dev/null 2>&1; then
+        echo "→ Installing Homebrew"
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        eval "$(/opt/homebrew/bin/brew shellenv 2>/dev/null || /usr/local/bin/brew shellenv)"
+    fi
     PM="brew"
 elif command -v apt >/dev/null 2>&1; then
     PM="apt"
@@ -38,7 +45,7 @@ while read -r pkg; do
 
     case "$PM" in
         brew)
-            brew list "$pkg" >/dev/null 2>&1 || brew install "$pkg"
+            command -v "$pkg" >/dev/null 2>&1 || brew list "$pkg" >/dev/null 2>&1 || brew install "$pkg"
             ;;
         apt)
             dpkg -s "$pkg" >/dev/null 2>&1 || sudo apt install -y "$pkg"

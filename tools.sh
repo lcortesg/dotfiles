@@ -112,7 +112,11 @@ install_miniconda() {
 # --------------------------------------------------
 
 install_meslo() {
-    FONTS_DIR="$HOME/.local/share/fonts"
+    if [ "$OS" = "Darwin" ]; then
+        FONTS_DIR="$HOME/Library/Fonts"
+    else
+        FONTS_DIR="$HOME/.local/share/fonts"
+    fi
     mkdir -p "$FONTS_DIR"
 
     if [ -f "$FONTS_DIR/MesloLGS NF Regular.ttf" ]; then
@@ -139,7 +143,11 @@ install_meslo() {
 # --------------------------------------------------
 
 install_atkinson() {
-    FONTS_DIR="$HOME/.local/share/fonts"
+    if [ "$OS" = "Darwin" ]; then
+        FONTS_DIR="$HOME/Library/Fonts"
+    else
+        FONTS_DIR="$HOME/.local/share/fonts"
+    fi
     mkdir -p "$FONTS_DIR"
 
     if [ -f "$FONTS_DIR/AtkinsonHyperlegibleMono-Regular.ttf" ]; then
