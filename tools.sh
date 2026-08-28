@@ -150,7 +150,7 @@ install_atkinson() {
     fi
     mkdir -p "$FONTS_DIR"
 
-    if [ -f "$FONTS_DIR/AtkinsonHyperlegibleMono-Regular.ttf" ]; then
+    if [ -f "$FONTS_DIR/AtkynsonMonoNerdFontMono-Regular.otf" ]; then
         echo "→ Atkinson Hyperlegible Mono Nerd Font already installed"
         return
     fi
@@ -162,7 +162,7 @@ install_atkinson() {
 
     curl -sL "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/AtkinsonHyperlegibleMono.zip" -o "$TEMP_DIR/AtkinsonHyperlegibleMono.zip"
     unzip -q "$TEMP_DIR/AtkinsonHyperlegibleMono.zip" -d "$TEMP_DIR"
-    find "$TEMP_DIR" -name "*.ttf" -exec cp {} "$FONTS_DIR/" \;
+    find "$TEMP_DIR" -name "*.otf" -o -name "*.ttf" | xargs -I{} cp {} "$FONTS_DIR/"
 
     if command_exists fc-cache; then
         fc-cache -fv "$FONTS_DIR" >/dev/null 2>&1

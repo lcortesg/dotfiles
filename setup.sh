@@ -33,4 +33,11 @@ echo "→ Installing dotfiles"
 echo "→ Building plugins"
 ./plugins.sh
 
+# --------------------------------------------------
+# Default shell
+# --------------------------------------------------
+
+echo "→ Setting default shell"
+./shell.sh
+
 echo "✔ Setup complete"
