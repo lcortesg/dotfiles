@@ -7,6 +7,9 @@
 // custom settings, run the `zed: Open Default Settings` command
 // from the command palette
 {
+  "agent_buffer_font_family": "AtkynsonMono Nerd Font",
+  "ui_font_family": "AtkynsonMono Nerd Font",
+  "agent_ui_font_family": "AtkynsonMono Nerd Font",
   "project_panel": {
     "dock": "left"
   },
@@ -55,7 +58,7 @@
   },
   "ui_font_size": 14,
   "buffer_font_size": 13,
-  "buffer_font_family": "MesloLGL Nerd Font",
+  "buffer_font_family": "AtkynsonMono Nerd Font",
   "soft_wrap": "editor_width",
   "theme": {
     "mode": "system",
@@ -64,7 +67,7 @@
   },
   "terminal": {
     "dock": "bottom",
-    "font_family": "MesloLGL Nerd Font",
+    "font_family": "AtkynsonMono Nerd Font Mono",
     "font_size": 12
   }
 }

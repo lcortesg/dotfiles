@@ -46,6 +46,10 @@ command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init zsh --cmd cd)"
 # fzf
 # --------------------------------------------------
 
+if [ -d "$HOME/.local/share/fzf/bin" ]; then
+    export PATH="$HOME/.local/share/fzf/bin:$PATH"
+fi
+
 if [ -d "$HOME/.local/share/fzf/shell" ]; then
     source "$HOME/.local/share/fzf/shell/key-bindings.zsh"
     source "$HOME/.local/share/fzf/shell/completion.zsh"
